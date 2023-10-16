@@ -1,6 +1,5 @@
-// src/todo/todo.entity.ts
-
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Todo {
@@ -10,6 +9,9 @@ export class Todo {
   @Column()
   title: string;
 
-  @Column({ default: false })
-  completed: boolean;
+  @Column()
+  description: string;
+
+  @ManyToOne(() => User, (user) => user.todos)
+  user: User;
 }
